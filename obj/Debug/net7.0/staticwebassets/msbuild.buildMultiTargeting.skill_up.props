@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\skill_up.props" />
+</Project>
