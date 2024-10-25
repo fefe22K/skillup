@@ -144,5 +144,7 @@ namespace skill_up.Controllers
         {
             return (_context.FuncionarioCursos?.Any(e => e.FuncCursoId == id)).GetValueOrDefault();
         }
+
+        
     }
 }

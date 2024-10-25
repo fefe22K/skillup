@@ -10,6 +10,8 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddHostedService<EmailService>();
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddControllers();
@@ -41,8 +43,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
 });
 
-builder.Services.AddCors(options => { options.AddPolicy(MyAllowSpecificOrigins, policy => { policy.WithOrigins("*") .AllowAnyHeader() .AllowAnyMethod(); }); });
- 
+builder.Services.AddCors(options => { options.AddPolicy(MyAllowSpecificOrigins, policy => { policy.WithOrigins("*") .AllowAnyHeader() .AllowAnyMethod(); }); }); 
 
 var app = builder.Build();
 

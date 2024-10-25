@@ -12,4 +12,8 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     public AppDbContext(DbContextOptions options): base(options){}
     public DbSet<Curso> Cursos{get;set;}
     public DbSet<FuncionarioCurso> FuncionarioCursos{get;set;}
+
+    public DbSet<ApplicationUser> AspNetUsers{get;set;}
+
+    public DbSet<skill_up.Models.OrgaoEmissor> OrgaoEmissor { get; set; } = default!;
 }

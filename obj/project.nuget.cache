@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "klQJdXOVQPPcr1LVDr78j5U1S65dEkfhCUGIUgtdoIRJj8tTq6VgTRLqoJ9X4tfTD0344hbt4S8cFLjsC240tA==",
+  "dgSpecHash": "DU2FEL4XVQWcEIdmL4XeLf/ZB4Zl7juEvB0ek7BzfpyUPEg4uRdeDGuTAWQcXgt88RFTO318qendLRoR/CNdLg==",
   "success": true,
-  "projectFilePath": "C:\\Dev\\TCC\\Skill_Up\\skill_up.csproj",
+  "projectFilePath": "C:\\Users\\Aluno Dev\\Documents\\Dev\\skill_up\\skillup\\skill_up.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aluno Dev\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Aluno Dev\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\TCC\\Skill_Up\\skill_up.csproj": {}
+    "C:\\Users\\Aluno Dev\\Documents\\Dev\\skill_up\\skillup\\skill_up.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\TCC\\Skill_Up\\skill_up.csproj": {
+    "C:\\Users\\Aluno Dev\\Documents\\Dev\\skill_up\\skillup\\skill_up.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\TCC\\Skill_Up\\skill_up.csproj",
+        "projectUniqueName": "C:\\Users\\Aluno Dev\\Documents\\Dev\\skill_up\\skillup\\skill_up.csproj",
         "projectName": "skill_up",
-        "projectPath": "C:\\Dev\\TCC\\Skill_Up\\skill_up.csproj",
+        "projectPath": "C:\\Users\\Aluno Dev\\Documents\\Dev\\skill_up\\skillup\\skill_up.csproj",
         "packagesPath": "C:\\Users\\Aluno Dev\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\TCC\\Skill_Up\\obj\\",
+        "outputPath": "C:\\Users\\Aluno Dev\\Documents\\Dev\\skill_up\\skillup\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aluno Dev\\AppData\\Roaming\\NuGet\\NuGet.Config"

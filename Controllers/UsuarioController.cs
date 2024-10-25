@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using skill_up.Context;
 using skill_up.Models;
@@ -35,9 +36,37 @@ public class UsuarioController : ControllerBase
     /// </summary>
     /// <remarks> </remarks>
     [HttpGet]
-    public ActionResult<string> Get()
+    public async Task<ActionResult <IEnumerable<ApplicationUser>>> Get()
     {
-        return "<< Controlador UsuariosController :: WebApiUsuarios >>";
+         if (_context.AspNetUsers == null)
+        {
+            return NotFound();
+        }
+        var funcionario = await _context.AspNetUsers.ToListAsync();
+
+        if (funcionario == null)
+        {
+            return NotFound();
+        }
+
+        return funcionario;
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ApplicationUser>> GetUsuario(int id)
+    {
+        if (_context.AspNetUsers == null)
+        {
+            return NotFound();
+        }
+        var funcionario = await _context.AspNetUsers.FindAsync(id);
+
+        if (funcionario == null)
+        {
+            return NotFound();
+        }
+
+        return funcionario;
     }
 
       /// <summary>
@@ -51,14 +80,17 @@ public class UsuarioController : ControllerBase
             var user = new ApplicationUser
             {
                 UserName = model.Nome,
-                Cpf = model.Cpf
+                Cpf = model.Cpf,
+                Email = model.Email,
+                PhoneNumber = model.Telefone,
                 
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(user, "Basic");
+            {   string tipo = model.Tipo == "B"? "Basic":"Admin";
+                
+                await _userManager.AddToRoleAsync(user, tipo);
                 var roles = await _userManager.GetRolesAsync(user);
                 return BuildToken(model, roles);
             }
@@ -69,7 +101,34 @@ public class UsuarioController : ControllerBase
         }
     }
 
-   
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutFuncionarioCurso(int id, FuncionarioCurso funcionarioCurso)
+    {
+        if (id != funcionarioCurso.FuncCursoId)
+        {
+            return BadRequest();
+        }
+
+        _context.Entry(funcionarioCurso).State = EntityState.Modified;
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!FuncionarioCursoExists(id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        return NoContent();
+    }
 
      
    /// <summary>
@@ -126,6 +185,10 @@ public class UsuarioController : ControllerBase
             Expiration = expiration,
             Roles = userRoles
         };
+    }
+        private bool FuncionarioCursoExists(int id)
+    {
+        return (_context.FuncionarioCursos?.Any(e => e.FuncCursoId == id)).GetValueOrDefault();
     }
 }
 
