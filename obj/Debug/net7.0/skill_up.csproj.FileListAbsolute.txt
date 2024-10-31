@@ -850,3 +850,5 @@ C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\obj\Debug\net7.0\scopedcss\bun
 C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\obj\Debug\net7.0\skill_up.csproj.CopyComplete
 C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\obj\Debug\net7.0\skill_up.genruntimeconfig.cache
 C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\obj\Debug\net7.0\ref\skill_up.dll
+C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\bin\Debug\net7.0\skill_up.xml
+C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\obj\Debug\net7.0\skill_up.xml
