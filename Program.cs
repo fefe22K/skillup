@@ -71,13 +71,6 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddCors(options => { options.AddPolicy(MyAllowSpecificOrigins, policy => { policy.WithOrigins("*") .AllowAnyHeader() .AllowAnyMethod(); }); }); 
 
-
-
-
-
-
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

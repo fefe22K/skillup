@@ -53,7 +53,7 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<ApplicationUser>> GetUsuario(int id)
+    public async Task<ActionResult<ApplicationUser>> GetUsuario(string id)
     {
         if (_context.AspNetUsers == null)
         {
@@ -88,11 +88,11 @@ public class UsuarioController : ControllerBase
 
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
-            {   string tipo = model.Tipo == "B"? "Basic":"Admin";
+            {   string tipo = model.Tipo == "A"? "Admin":"Basic";
                 
                 await _userManager.AddToRoleAsync(user, tipo);
                 var roles = await _userManager.GetRolesAsync(user);
-                return BuildToken(model, roles);
+                return BuildToken(model, roles, user);
             }
             else
             {
@@ -144,7 +144,7 @@ public class UsuarioController : ControllerBase
         {
             var user = await _userManager.FindByNameAsync(userInfo.Cpf);
             var roles = await _userManager.GetRolesAsync(user);
-            return BuildToken(userInfo, roles);
+            return BuildToken(userInfo, roles, user);
         }
         else
         {
@@ -153,7 +153,7 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    private UserToken BuildToken(UserInfo userInfo, IList<string> userRoles)
+    private UserToken BuildToken(UserInfo userInfo, IList<string> userRoles, ApplicationUser user)
     {
         var claims = new List<Claim>
         {
@@ -183,7 +183,8 @@ public class UsuarioController : ControllerBase
         {
             Token = new JwtSecurityTokenHandler().WriteToken(token),
             Expiration = expiration,
-            Roles = userRoles
+            Roles = userRoles,
+            Id = user.Id
         };
     }
         private bool FuncionarioCursoExists(int id)

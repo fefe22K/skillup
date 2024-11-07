@@ -852,3 +852,6 @@ C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\obj\Debug\net7.0\skill_up.genr
 C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\obj\Debug\net7.0\ref\skill_up.dll
 C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\bin\Debug\net7.0\skill_up.xml
 C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\obj\Debug\net7.0\skill_up.xml
+C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\bin\Debug\net7.0\EPPlus.dll
+C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\bin\Debug\net7.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\Aluno Dev\Documents\Dev\skill_up\skillup\bin\Debug\net7.0\System.Xml.XPath.XmlDocument.dll

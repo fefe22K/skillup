@@ -28,10 +28,10 @@ namespace skill_up.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FuncionarioCurso>>> GetFuncionarioCursos()
         {
-          if (_context.FuncionarioCursos == null)
-          {
-              return NotFound();
-          }
+            if (_context.FuncionarioCursos == null)
+            {
+                return NotFound();
+            }
             return await _context.FuncionarioCursos.ToListAsync();
         }
 
@@ -44,10 +44,10 @@ namespace skill_up.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<FuncionarioCurso>> GetFuncionarioCurso(int id)
         {
-          if (_context.FuncionarioCursos == null)
-          {
-              return NotFound();
-          }
+            if (_context.FuncionarioCursos == null)
+            {
+                return NotFound();
+            }
             var funcionarioCurso = await _context.FuncionarioCursos.FindAsync(id);
 
             if (funcionarioCurso == null)
@@ -57,13 +57,79 @@ namespace skill_up.Controllers
 
             return funcionarioCurso;
         }
-           
-           /// <summary>
-           /// Edita o curso do funcionario
-           /// </summary>
-           /// <param name="id"></param>
-           /// <param name="funcionarioCurso"></param>
-           /// <returns></returns>
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+
+        [HttpGet("Funcionario/{id}")]
+        public async Task<ActionResult<IEnumerable<CursoDoFunc>>> GetCursoDoFunc(string id)
+        {
+            if (_context.FuncionarioCursos == null)
+            {
+                return NotFound();
+            }
+            List<CursoDoFunc> cursoDoFunc = new List<CursoDoFunc>();
+            var funcionarioCursos = await _context.FuncionarioCursos.Where(p => p.Id == id).Include(c => c.Curso).ToListAsync();
+            foreach (var funcionariocurso in funcionarioCursos)
+            {
+                cursoDoFunc.Add(
+                    new CursoDoFunc
+                    {
+                        IdCurso = funcionariocurso.Curso.CursoId,
+                        NomeCurso = funcionariocurso.Curso.Nome,
+                    }
+                );
+            }
+            if (cursoDoFunc == null)
+            {
+                return NotFound();
+            }
+            return cursoDoFunc;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("Curso/{id}")]
+        public async Task<ActionResult<IEnumerable<FuncionarioDoCurso>>> GetFuncionarioDoCurso(int id)
+        {
+            if (_context.FuncionarioCursos == null)
+            {
+                return NotFound();
+            }
+            List<FuncionarioDoCurso> funcionariodocurso = new List<FuncionarioDoCurso>();
+            var funcionarioCursos = await _context.FuncionarioCursos.Where(p => p.CursoId == id).Include(f => f.Funcionario).ToListAsync();
+            foreach (var funcionariocurso in funcionarioCursos)
+            {
+                FuncionarioDoCurso funcc = new()
+                {
+                        IdFunc = funcionariocurso.Funcionario.Id,
+                        Nome = funcionariocurso.Funcionario.Nome,
+                        Email = funcionariocurso.Funcionario.Email
+                };
+                funcionariodocurso.Add(funcc);
+            }
+            if (funcionariodocurso == null)
+            {
+                return NotFound();
+            }
+            return funcionariodocurso;
+        }
+
+
+
+
+        /// <summary>
+        /// Edita o curso do funcionario
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="funcionarioCurso"></param>
+        /// <returns></returns>
         // PUT: api/FuncionarioCurso/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -105,10 +171,10 @@ namespace skill_up.Controllers
         [HttpPost]
         public async Task<ActionResult<FuncionarioCurso>> PostFuncionarioCurso(FuncionarioCurso funcionarioCurso)
         {
-          if (_context.FuncionarioCursos == null)
-          {
-              return Problem("Entity set 'AppDbContext.FuncionarioCursos'  is null.");
-          }
+            if (_context.FuncionarioCursos == null)
+            {
+                return Problem("Entity set 'AppDbContext.FuncionarioCursos'  is null.");
+            }
             _context.FuncionarioCursos.Add(funcionarioCurso);
             await _context.SaveChangesAsync();
 
@@ -145,6 +211,6 @@ namespace skill_up.Controllers
             return (_context.FuncionarioCursos?.Any(e => e.FuncCursoId == id)).GetValueOrDefault();
         }
 
-        
+
     }
 }

@@ -45,6 +45,20 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:skill_up.Controllers.FuncionarioCursoController.GetCursoDoFunc(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:skill_up.Controllers.FuncionarioCursoController.GetFuncionarioDoCurso(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:skill_up.Controllers.FuncionarioCursoController.PutFuncionarioCurso(System.Int32,skill_up.Models.FuncionarioCurso)">
             <summary>
             Edita o curso do funcionario
