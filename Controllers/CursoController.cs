@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -29,25 +30,25 @@ namespace skill_up.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Curso>>> GetCursos()
         {
-          if (_context.Cursos == null)
-          {
-              return NotFound();
-          }
+            if (_context.Cursos == null)
+            {
+                return NotFound();
+            }
             return await _context.Cursos.ToListAsync();
         }
 
-         /// <summary>
-         /// Retorna um curso especifico existente
-         /// </summary>
-       ///<remarks> </remarks>
+        /// <summary>
+        /// Retorna um curso especifico existente
+        /// </summary>
+        ///<remarks> </remarks>
         // GET: api/Curso/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Curso>> GetCurso(int id)
         {
-          if (_context.Cursos == null)
-          {
-              return NotFound();
-          }
+            if (_context.Cursos == null)
+            {
+                return NotFound();
+            }
             var curso = await _context.Cursos.FindAsync(id);
 
             if (curso == null)
@@ -101,17 +102,17 @@ namespace skill_up.Controllers
         [HttpPost]
         public async Task<ActionResult<Curso>> PostCurso(Curso curso)
         {
-          if (_context.Cursos == null)
-          {
-              return Problem("Entity set 'AppDbContext.Cursos'  is null.");
-          }
+            if (_context.Cursos == null)
+            {
+                return Problem("Entity set 'AppDbContext.Cursos'  is null.");
+            }
             _context.Cursos.Add(curso);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCurso", new { id = curso.CursoId }, curso);
         }
 
-         /// <summary>
+        /// <summary>
         /// Deleta um curso desejado
         /// </summary>
         // DELETE: api/Curso/5
@@ -128,8 +129,19 @@ namespace skill_up.Controllers
                 return NotFound();
             }
 
-            _context.Cursos.Remove(curso);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Cursos.Remove(curso);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                Console.WriteLine("*************************");
+                if (ex.Message.Contains("FK_FuncionarioCursos_AspNetUsers_FuncionarioId"))
+                {
+                    return BadRequest("Funcionário possui cursos vinculados!");
+                }
+            }
 
             return NoContent();
         }

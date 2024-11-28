@@ -72,7 +72,7 @@ namespace skill_up.Controllers
                 return NotFound();
             }
             List<CursoDoFunc> cursoDoFunc = new List<CursoDoFunc>();
-            var funcionarioCursos = await _context.FuncionarioCursos.Where(p => p.Id == id).Include(c => c.Curso).ToListAsync();
+            var funcionarioCursos = await _context.FuncionarioCursos.Where(p => p.FuncionarioId == id).Include(c => c.Curso).ToListAsync();
             foreach (var funcionariocurso in funcionarioCursos)
             {
                 cursoDoFunc.Add(

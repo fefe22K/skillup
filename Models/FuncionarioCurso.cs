@@ -8,12 +8,14 @@ public class FuncionarioCurso
 
     [Key]
     public int FuncCursoId { get; set; }
-    public string? Id { get; set; }
+    public string? FuncionarioId { get; set; }
     public int CursoId { get; set; }
-    public DateTime DataValidade { get; set; }
+    public DateOnly DataValidade { get; set; }
 
     [JsonIgnore]
     public virtual ApplicationUser? Funcionario { get; set; }
     [JsonIgnore]
     public virtual Curso? Curso { get; set; }
+
+   
 }

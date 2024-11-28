@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin\\Release\\net7.0\\publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/1ed76ae4-cdda-40d8-b712-948095f1c5ae/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/skup"
+}

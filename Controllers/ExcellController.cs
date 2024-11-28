@@ -42,14 +42,16 @@ namespace skill_up.Controllers
                         var data = worksheet.Cells[row, 3].Text;
 
                         string formato = "yyyy-MM-dd";
-                        DateTime dataConvertida = DateTime.ParseExact(data, formato, CultureInfo.InvariantCulture);
-                        Console.WriteLine("*************************" + data+ " ***** "+ dataConvertida);
+                        DateOnly dataConvertida = DateOnly.ParseExact(data, formato, CultureInfo.InvariantCulture);
+                        
+                        DateOnly dataFinal = DateOnly.Parse(data);
+                        Console.WriteLine("*************************" + data+ " ***** "+ dataConvertida+"********"+dataFinal);
                     
                         var funcionarioCurso = new FuncionarioCurso
                         {
-                            Id = funcionario.Id,
+                            FuncionarioId = funcionario.Id,
                             CursoId = cursoId.CursoId,
-                            DataValidade = dataConvertida,
+                            DataValidade = dataFinal,
                              // Assume que 'Nome' é a propriedade para o nome do curso
                         };
 

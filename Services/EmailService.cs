@@ -28,14 +28,14 @@ public class EmailService : BackgroundService
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
+ 
 
                 var result = context.AspNetUsers
                     .Join(context.FuncionarioCursos,
                           u => u.Id,
-                          f => f.Id,
+                          f => f.FuncionarioId,
                           (u, f) => new { u, f }) // Join AspNetUsers and FuncionarioCursos
-                    .Where(uf => uf.f.DataValidade <= DateTime.UtcNow.AddDays(15)) // Verifica se a data de validade é menor ou igual a 15 dias a partir de agora
+                    .Where(uf => uf.f.DataValidade <=  DateOnly.FromDateTime(DateTime.UtcNow.AddDays(15))) // Verifica se a data de validade é menor ou igual a 15 dias a partir de agora
                    
                     .Select(uf => new
                     {

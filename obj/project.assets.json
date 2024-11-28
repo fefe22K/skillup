@@ -12566,11 +12566,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Aluno Dev\\Documents\\Dev\\skill_up\\skillup\\skill_up.csproj",
+      "projectUniqueName": "C:\\Dev\\TCC\\skillup\\skill_up.csproj",
       "projectName": "skill_up",
-      "projectPath": "C:\\Users\\Aluno Dev\\Documents\\Dev\\skill_up\\skillup\\skill_up.csproj",
+      "projectPath": "C:\\Dev\\TCC\\skillup\\skill_up.csproj",
       "packagesPath": "C:\\Users\\Aluno Dev\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aluno Dev\\Documents\\Dev\\skill_up\\skillup\\obj\\",
+      "outputPath": "C:\\Dev\\TCC\\skillup\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Aluno Dev\\AppData\\Roaming\\NuGet\\NuGet.Config"

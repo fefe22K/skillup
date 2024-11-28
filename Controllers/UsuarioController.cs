@@ -79,8 +79,9 @@ public class UsuarioController : ControllerBase
         {
             var user = new ApplicationUser
             {
-                UserName = model.Nome,
+                UserName = model.Cpf,
                 Cpf = model.Cpf,
+                Nome = model.Nome,
                 Email = model.Email,
                 PhoneNumber = model.Telefone,
                 
@@ -152,6 +153,7 @@ public class UsuarioController : ControllerBase
             return BadRequest(ModelState);
         }
     }
+         
 
     private UserToken BuildToken(UserInfo userInfo, IList<string> userRoles, ApplicationUser user)
     {
@@ -191,6 +193,35 @@ public class UsuarioController : ControllerBase
     {
         return (_context.FuncionarioCursos?.Any(e => e.FuncCursoId == id)).GetValueOrDefault();
     }
+
+     [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUsuario(string id)
+        {
+            if (_context.Users == null)
+            {
+                return NotFound();
+            }
+            var usuario = await _context.AspNetUsers.FindAsync(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+             try{
+            _context.AspNetUsers.Remove(usuario);
+            await _context.SaveChangesAsync();
+             }catch(DbUpdateException ex){
+                Console.WriteLine("***************************"+ex.Message);
+                if(ex.InnerException.Message.Contains("FK_FuncionarioCursos_AspNetUsers_FuncionarioId"))
+                {
+                    return BadRequest("Funcionario ja tem cursos vinculados então não pode ser excluido");
+                }
+
+             }
+
+            return NoContent();
+        }
+
+
 }
 
 

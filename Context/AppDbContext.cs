@@ -18,12 +18,5 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<skill_up.Models.OrgaoEmissor> OrgaoEmissor { get; set; } = default!;
     public object Treinamentos { get; internal set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<FuncionarioCurso>()
-        .HasOne(fc => fc.Funcionario)
-        .WithMany(f => f.FuncionarioCursos)
-        .HasForeignKey(fc => fc.FuncionarioId);
-}
 
 }
